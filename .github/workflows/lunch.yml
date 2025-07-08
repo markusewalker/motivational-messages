@@ -1,0 +1,31 @@
+---
+name: Lunch Reminder
+
+on:
+  schedule:
+    - cron: '40 19 * * 1-5'
+  workflow_dispatch:
+
+env:
+  EMAIL: ${{ secrets.EMAIL }}
+  APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
+  PHONE_NUMBER: ${{ secrets.PHONE_NUMBER }}
+  CARRIER: ${{ secrets.CARRIER }}
+
+jobs:
+  send-lunch-sms:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+    
+    - name: Send lunch SMS
+      uses: ./.github/actions/run-command
+      with:
+        command: 'lunch'

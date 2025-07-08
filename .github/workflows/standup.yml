@@ -8,10 +8,10 @@ on:
   workflow_dispatch:
 
 env:
-    EMAIL: ${{ secrets.EMAIL }}
-    PASSWORD: ${{ secrets.PASSWORD }}
-    PHONE_NUMBER: ${{ secrets.PHONE_NUMBER }}
-    CARRIER: ${{ secrets.CARRIER }}
+  EMAIL: ${{ secrets.EMAIL }}
+  APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
+  PHONE_NUMBER: ${{ secrets.PHONE_NUMBER }}
+  CARRIER: ${{ secrets.CARRIER }}
 
 jobs:
   send-standup-sms:
@@ -19,7 +19,7 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -27,8 +27,6 @@ jobs:
         python-version: '3.13'
     
     - name: Send standup SMS
-      run: |
-        python3 -m venv env
-        source env/bin/activate
-        pip3 install -r required_libraries.txt
-        python3 src/standup.py
+      uses: ./.github/actions/run-command
+      with:
+        command: 'standup'
