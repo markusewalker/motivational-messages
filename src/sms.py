@@ -8,8 +8,8 @@ import sys
 import argparse
 import smtplib
 
-SMS_GATEWAYS = {
-    'verizon': "vtext.com",
+GATEWAYS = {
+    'verizon': "vzwpix.com",
     'att': "txt.att.net",
     'tmobile': "tmomail.net",
     'sprint': "messaging.sprintpcs.com",
@@ -18,7 +18,6 @@ SMS_GATEWAYS = {
     'uscellular': "email.uscc.net",
     'metropcs': "mymetropcs.com",
     'tracfone': "mmst5.tracfone.com",
-    'straight_talk': "vtext.com",
     'google_fi': "msg.fi.google.com"
 }
 
@@ -43,29 +42,45 @@ def send_sms(phone_number, carrier, message):
     """
     Send SMS using email-to-SMS gateway
     """
-    if carrier.lower() not in SMS_GATEWAYS:
-        print(f"Unsupported carrier '{carrier}'. Supported carriers: {', '.join(SMS_GATEWAYS.keys())}")
+    if carrier.lower() not in GATEWAYS:
+        print(f"Unsupported carrier '{carrier}'. Supported carriers: {', '.join(GATEWAYS.keys())}")
         return False
     
-    sms_email = f"{phone_number}@{SMS_GATEWAYS[carrier.lower()]}"
+    clean_phone = ''.join(filter(str.isdigit, phone_number))
+    if clean_phone.startswith('1') and len(clean_phone) == 11:
+        clean_phone = clean_phone[1:]
+
+    sms_email = f"{clean_phone}@{GATEWAYS[carrier.lower()]}"
     
     try:
-        msg = MIMEText(message, 'plain')
+        msg = MIMEMultipart('alternative')
         msg['From'] = EMAIL
         msg['To'] = sms_email
+        msg['Subject'] = ""
+        
+        text_part = MIMEText(message, 'plain')
+        msg.attach(text_part)
 
         server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
         server.starttls()
         server.login(EMAIL, APP_PASSWORD)
-        server.sendmail(EMAIL, sms_email, msg.as_string())
-        server.quit()
         
+        for attempt in range(2):
+            try:
+                server.sendmail(EMAIL, [sms_email], msg.as_string())
+                break
+            except Exception as retry_e:
+                if attempt == 1:
+                    raise retry_e
+                
+        server.quit()
+
         return True
         
     except Exception as e:
         print(f"Error sending SMS: {str(e)}")
         return False
-    
+
 def main():
     parser = argparse.ArgumentParser(description='Send motivational SMS messages')
     parser.add_argument('--type', '-t', 
