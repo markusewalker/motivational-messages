@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path=".env", override=True)
 
 import os
-from datetime import time
 
 EMAIL               = os.getenv('EMAIL')
 PASSWORD            = os.getenv('PASSWORD')
