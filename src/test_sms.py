@@ -10,7 +10,7 @@ from io import StringIO
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src'))
 
-from sms import SMS_GATEWAYS, MESSAGE_TYPES, main, get_message, send_sms
+from sms import GATEWAYS, MESSAGE_TYPES, main, get_message, send_sms
 
 @pytest.mark.unit
 @patch('sms.smtplib.SMTP')
@@ -37,8 +37,8 @@ def test_simple_dummy_message_send(mock_smtp_class):
     
     args, kwargs = mock_server.sendmail.call_args
     assert args[0] == 'test@example.com'
-    expected_gateway = SMS_GATEWAYS[dummy_carrier]
-    assert args[1] == f"{dummy_phone}@{expected_gateway}"
+    expected_gateway = GATEWAYS[dummy_carrier]
+    assert args[1] == [f"{dummy_phone}@{expected_gateway}"]
     assert dummy_message in args[2]
 
 @pytest.mark.unit

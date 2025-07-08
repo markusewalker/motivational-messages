@@ -1,12 +1,25 @@
 ---
 name: Create test .env file
 description: "Creates a .env file with required environment variables"
+inputs:
+  email:
+    description: "Email address for sending SMS"
+    required: true
+  password:
+    description: "App Password for the email account"
+    required: true
+  phone_number:
+    description: "Phone number to send SMS to"
+    required: true
+  carrier:
+    description: "Carrier for the phone number"
+    required: true
 runs:
   using: composite
   steps:
     - run: |
-        echo "EMAIL=test@example.com" > src/.env
-        echo "PASSWORD=test_password" >> src/.env
-        echo "PHONE_NUMBER=5551234567" >> src/.env
-        echo "CARRIER=verizon" >> src/.env
+        echo "EMAIL=${{ inputs.email }}" > .env
+        echo "APP_PASSWORD=${{ inputs.password }}" >> .env
+        echo "PHONE_NUMBER=${{ inputs.phone_number }}" >> .env
+        echo "CARRIER=${{ inputs.carrier }}" >> .env
       shell: bash

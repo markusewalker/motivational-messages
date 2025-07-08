@@ -25,7 +25,12 @@ jobs:
 
     - name: Create test .env file
       uses: ./.github/actions/create-env-file
-    
-    - name: Run unit tests
+      with:
+        email: "test@example.com"
+        password: "test_password"
+        phone_number: "5551234567"
+        carrier: "verizon"
+
+    - name: Run tests
       run: |
         pytest -m "unit or integration" -v
