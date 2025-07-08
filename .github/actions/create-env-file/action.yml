@@ -1,0 +1,12 @@
+---
+name: Create test .env file
+description: "Creates a .env file with required environment variables"
+runs:
+  using: composite
+  steps:
+    - run: |
+        echo "EMAIL=test@example.com" > src/.env
+        echo "PASSWORD=test_password" >> src/.env
+        echo "PHONE_NUMBER=5551234567" >> src/.env
+        echo "CARRIER=verizon" >> src/.env
+      shell: bash
