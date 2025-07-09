@@ -13,7 +13,7 @@ env:
   CARRIER: ${{ secrets.CARRIER }}
 
 jobs:
-  send-eod-sms:
+  send-eod-notification:
     runs-on: ubuntu-latest
     
     steps:
@@ -28,12 +28,10 @@ jobs:
     - name: Create .env file
       uses: ./.github/actions/create-env-file
       with:
-        email: ${{ secrets.EMAIL }}
-        password: ${{ secrets.APP_PASSWORD }}
-        phone_number: ${{ secrets.PHONE_NUMBER }}
-        carrier: ${{ secrets.CARRIER }}
-    
-    - name: Send end of day SMS
+        user_key: ${{ secrets.PUSHOVER_USER_KEY }}
+        token: ${{ secrets.PUSHOVER_API_TOKEN }}
+
+    - name: Send end of day notification
       uses: ./.github/actions/run-command
       with:
         command: 'end_work_day'

@@ -2,24 +2,16 @@
 name: Create test .env file
 description: "Creates a .env file with required environment variables"
 inputs:
-  email:
-    description: "Email address for sending SMS"
+  user_key:
+    description: "Pushover User Key"
     required: true
-  password:
-    description: "App Password for the email account"
-    required: true
-  phone_number:
-    description: "Phone number to send SMS to"
-    required: true
-  carrier:
-    description: "Carrier for the phone number"
+  token:
+    description: "Pushover API Token"
     required: true
 runs:
   using: composite
   steps:
     - run: |
-        echo "EMAIL=${{ inputs.email }}" > .env
-        echo "APP_PASSWORD=${{ inputs.password }}" >> .env
-        echo "PHONE_NUMBER=${{ inputs.phone_number }}" >> .env
-        echo "CARRIER=${{ inputs.carrier }}" >> .env
+        echo "PUSHOVER_USER_KEY=${{ inputs.user_key }}" > .env
+        echo "PUSHOVER_API_TOKEN=${{ inputs.token }}" >> .env
       shell: bash

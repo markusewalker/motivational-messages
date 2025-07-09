@@ -1,5 +1,5 @@
 ---
-name: Testing sms.py
+name: Testing pushover.py
 
 on:
   pull_request:
