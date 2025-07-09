@@ -34,7 +34,7 @@ def test_simple_dummy_pushover_send(mock_post):
             "token": "test_api_token_12345678901234567890",
             "user": "test_user_key_12345678901234567890",
             "message": dummy_message,
-            "title": "Notification"
+            "title": "Motivational Message"
         }
     )
 
@@ -141,7 +141,7 @@ def test_standup_message_command(mock_stdout, mock_post):
             "token": "test_api_token",
             "user": "test_user_key",
             "message": MESSAGE_TYPES['standup'],
-            "title": "Notification"
+            "title": "Motivational Message"
         }
     )
 

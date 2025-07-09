@@ -28,7 +28,7 @@ def send_pushover_notification(message):
             "token": PUSHOVER_API_TOKEN,
             "user": PUSHOVER_USER_KEY,
             "message": message,
-            "title": "Notification"
+            "title": "Motivational Message",
         }
         
         response = requests.post(url, data=data)
