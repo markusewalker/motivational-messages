@@ -7,10 +7,8 @@ on:
   workflow_dispatch:
 
 env:
-  EMAIL: ${{ secrets.EMAIL }}
-  APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
-  PHONE_NUMBER: ${{ secrets.PHONE_NUMBER }}
-  CARRIER: ${{ secrets.CARRIER }}
+  PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
+  PUSHOVER_API_TOKEN: ${{ secrets.PUSHOVER_API_TOKEN }}
 
 jobs:
   send-break-notification:
@@ -28,8 +26,8 @@ jobs:
     - name: Create .env file
       uses: ./.github/actions/create-env-file
       with:
-        user_key: ${{ secrets.PUSHOVER_USER_KEY }}
-        token: ${{ secrets.PUSHOVER_API_TOKEN }}
+        user_key: ${{ env.PUSHOVER_USER_KEY }}
+        token: ${{ env.PUSHOVER_API_TOKEN }}
 
     - name: Send break notification
       uses: ./.github/actions/run-command
