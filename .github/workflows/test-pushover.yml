@@ -26,10 +26,8 @@ jobs:
     - name: Create test .env file
       uses: ./.github/actions/create-env-file
       with:
-        email: "test@example.com"
-        password: "test_password"
-        phone_number: "5551234567"
-        carrier: "verizon"
+        user_key: "bogus"
+        token: "bogus"
 
     - name: Run tests
       run: |
