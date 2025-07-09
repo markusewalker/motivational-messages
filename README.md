@@ -45,6 +45,7 @@ options:
   --type, -t {default,standup,break,lunch,end_work_day}
                         Type of message to send
   --list-types, -l      List available message types
+```
 
 ## Testing
 `pytest` has been used to properly test this program in completeness. You can use the following command to test as an example:
