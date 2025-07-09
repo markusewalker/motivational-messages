@@ -5,10 +5,5 @@ load_dotenv(dotenv_path=".env", override=True)
 
 import os
 
-EMAIL               = os.getenv('EMAIL')
-APP_PASSWORD        = os.getenv('APP_PASSWORD')
-PHONE_NUMBER        = os.getenv('PHONE_NUMBER')
-CARRIER             = os.getenv('CARRIER')
-
-SMTP_SERVER         = "smtp.gmail.com"
-SMTP_PORT           = 587
+PUSHOVER_USER_KEY   = os.getenv("PUSHOVER_USER_KEY")
+PUSHOVER_API_TOKEN  = os.getenv("PUSHOVER_API_TOKEN")

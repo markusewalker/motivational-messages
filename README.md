@@ -1,5 +1,5 @@
 # Motivational Messages
-This is a Github Actions based framework that is meant to send motivational messages via email-to-SMS gateway for the typical work day! However, if you want to try running this locally, continue reading on to see how.
+This is a Github Actions based framework that is meant to send motivational messages via the Pushover app for the typical work day! However, if you want to try running this locally, continue reading on to see how.
 
 ## Table of Contents
 1. [Prerequisites](#Prerequisites)
@@ -13,6 +13,7 @@ In order to properly run this, you will need the following installed on your cli
 - `python3`
 - `pip3`
 - `venv` (need `pip3` before installing)
+- Pushover app installed on your device
 
 ## Getting Started
 Once you have followed the prerequisites and installed all the needed dependencies, run the following commands:
@@ -26,27 +27,24 @@ pip3 install -r required_libraries.txt
 Once done, create an `.env` file that has the following filled out:
 
 ```
-EMAIL=""
-APP_PASSWORD=""
-PHONE_NUMBER=""     # Must not include any spaces or dashes
-CARRIER=""
+PUSHOVER_USER_KEY   = ""
+PUSHOVER_API_TOKEN  = ""
 ```
 
 ## Running Program
-To run the actual program, there are a few options you can do as indicated by `python3 sms.py -h`. Here is the that output for your convenience:
+To run the actual program, there are a few options you can do as indicated by `python3 pushover.py -h`. Here is the that output for your convenience:
 
 ```
-$ python3 sms.py -h
-usage: sms.py [-h] [--type {standup,break,lunch,end_work_day}] [--list-types]
+ python3 pushover.py -h
+usage: pushover.py [-h] [--type {default,standup,break,lunch,end_work_day}] [--list-types]
 
-Send motivational SMS messages
+Send a motivational message via Pushover
 
 options:
   -h, --help            show this help message and exit
-  --type, -t {standup,break,lunch,end_work_day}
+  --type, -t {default,standup,break,lunch,end_work_day}
                         Type of message to send
   --list-types, -l      List available message types
-```
 
 ## Testing
 `pytest` has been used to properly test this program in completeness. You can use the following command to test as an example:
@@ -58,17 +56,20 @@ platform darwin -- Python 3.13.0, pytest-8.4.1, pluggy-1.6.0 -- /path/to/python
 cachedir: .pytest_cache
 rootdir: /path/to/github.com/motivational-messages
 configfile: pyproject.toml
-collected 9 items                                                                                                                      
+collected 12 items                                                                                                                      
 
-test_standup.py::test_simple_dummy_message_send PASSED                                                                           [ 11%]
-test_standup.py::test_get_message_default PASSED                                                                                 [ 22%]
-test_standup.py::test_get_message_standup PASSED                                                                                 [ 33%]
-test_standup.py::test_get_message_invalid_type PASSED                                                                            [ 44%]
-test_standup.py::test_list_types_short_command PASSED                                                                            [ 55%]
-test_standup.py::test_list_types_long_command PASSED                                                                             [ 66%]
-test_standup.py::test_standup_message_command PASSED                                                                             [ 77%]
-test_standup.py::test_sms_script_list_types PASSED                                                                               [ 88%]
-test_standup.py::test_sms_script_standup_type PASSED                                                                             [100%]
+test_pushover.py::test_simple_dummy_pushover_send PASSED                                                                         [  8%]
+test_pushover.py::test_pushover_missing_user_key PASSED                                                                          [ 16%]
+test_pushover.py::test_pushover_missing_api_token PASSED                                                                         [ 25%]
+test_pushover.py::test_pushover_api_error PASSED                                                                                 [ 33%]
+test_pushover.py::test_get_message_default PASSED                                                                                [ 41%]
+test_pushover.py::test_get_message_standup PASSED                                                                                [ 50%]
+test_pushover.py::test_get_message_invalid_type PASSED                                                                           [ 58%]
+test_pushover.py::test_list_types_short_command PASSED                                                                           [ 66%]
+test_pushover.py::test_list_types_long_command PASSED                                                                            [ 75%]
+test_pushover.py::test_standup_message_command PASSED                                                                            [ 83%]
+test_pushover.py::test_pushover_script_list_types PASSED                                                                         [ 91%]
+test_pushover.py::test_pushover_script_standup_type PASSED                                                                       [100%]
 
-========================================================== 9 passed in 0.18s ===========================================================
+========================================================== 12 passed in 0.28s ==========================================================
 ```
