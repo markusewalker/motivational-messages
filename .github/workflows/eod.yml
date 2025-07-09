@@ -3,7 +3,7 @@ name: End of Day Reminder
 
 on:
   schedule:
-    - cron: '0 1 * * 2-6'
+    - cron: '10 1 * * 2-6'
   workflow_dispatch:
 
 env:

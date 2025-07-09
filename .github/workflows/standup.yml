@@ -3,8 +3,8 @@ name: Standup Reminder
 
 on:
   schedule:
-    - cron: '0 17-23 * * *'
-    - cron: '0 0-5 * * *'
+    - cron: '10 17-23 * * *'
+    - cron: '10 0-1 * * *'
   workflow_dispatch:
 
 env:
