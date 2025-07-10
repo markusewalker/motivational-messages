@@ -2,8 +2,6 @@
 name: Break Reminder
 
 on:
-  schedule:
-    - cron: '10 20 * * 1-5'
   workflow_dispatch:
 
 env:

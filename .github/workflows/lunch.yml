@@ -2,8 +2,6 @@
 name: Lunch Reminder
 
 on:
-  schedule:
-    - cron: '45 19 * * 1-5'
   workflow_dispatch:
 
 env:
