@@ -5,7 +5,6 @@ This is a Github Actions based framework that is meant to send motivational mess
 1. [Prerequisites](#Prerequisites)
 2. [Getting Started](#Getting-Started)
 3. [Running Program](#Running-Program)
-4. [Testing](#Testing)
 
 ## Prerequisites
 In order to properly run this, you will need the following installed on your client machine:

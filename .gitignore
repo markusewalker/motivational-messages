@@ -9,3 +9,10 @@ dist/
 .vscode/
 .DS_Store
 .pytest_cache/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
