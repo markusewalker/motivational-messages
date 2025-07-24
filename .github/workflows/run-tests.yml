@@ -1,5 +1,5 @@
 ---
-name: Testing pushover.py
+name: Testing main.py
 
 on:
   pull_request:
@@ -8,7 +8,7 @@ on:
     branches: main
 
 jobs:
-  test:
+  run-tests:
     runs-on: ubuntu-latest
     
     steps:

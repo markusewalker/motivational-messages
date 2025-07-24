@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import requests
 from constants import PUSHOVER_USER_KEY, PUSHOVER_API_TOKEN
 import os
@@ -15,9 +13,13 @@ MESSAGE_TYPES = {
 }
 
 def get_message(message_type=None):
-    return MESSAGE_TYPES.get(message_type, MESSAGE_TYPES['default'])
+    """Returns the message based on the type specified, or the default message if no type is given"""
+    key = message_type if message_type is not None else 'default'
+    return MESSAGE_TYPES.get(key, MESSAGE_TYPES['default'])
+
 
 def send_pushover_notification(message):
+    """Sends the specified notification via Pushover API"""
     if not PUSHOVER_USER_KEY or not PUSHOVER_API_TOKEN:
         print("ERROR! Missing Pushover credentials...")
         return False
@@ -49,6 +51,7 @@ def send_pushover_notification(message):
     except Exception as e:
         print(f"Error sending Pushover message: {str(e)}")
         return False
+
 
 def main():
     parser = argparse.ArgumentParser(description='Send a motivational message via Pushover')

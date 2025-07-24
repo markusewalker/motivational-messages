@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from unittest.mock import patch, MagicMock
 import sys
 import os
@@ -7,15 +5,13 @@ import pytest
 import subprocess
 from io import StringIO
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__))))
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src'))
-
-from pushover import MESSAGE_TYPES, main, get_message, send_pushover_notification
+# The conftest.py handles the path setup, so we can import directly
+from main import MESSAGE_TYPES, main, get_message, send_pushover_notification
 
 @pytest.mark.unit
-@patch('pushover.requests.post')
-@patch('pushover.PUSHOVER_USER_KEY', 'test_user_key_12345678901234567890')
-@patch('pushover.PUSHOVER_API_TOKEN', 'test_api_token_12345678901234567890')
+@patch('main.requests.post')
+@patch('main.PUSHOVER_USER_KEY', 'test_user_key_12345678901234567890')
+@patch('main.PUSHOVER_API_TOKEN', 'test_api_token_12345678901234567890')
 def test_simple_dummy_pushover_send(mock_post):
     """Simple test to check if dummy Pushover message will send"""
     mock_response = MagicMock()
@@ -39,25 +35,25 @@ def test_simple_dummy_pushover_send(mock_post):
     )
 
 @pytest.mark.unit
-@patch('pushover.PUSHOVER_USER_KEY', None)
-@patch('pushover.PUSHOVER_API_TOKEN', 'test_api_token')
+@patch('main.PUSHOVER_USER_KEY', None)
+@patch('main.PUSHOVER_API_TOKEN', 'test_api_token')
 def test_pushover_missing_user_key():
     """Test Pushover notification with missing user key"""
     result = send_pushover_notification("Test message")
     assert result is False, "Should fail when user key is missing"
 
 @pytest.mark.unit
-@patch('pushover.PUSHOVER_USER_KEY', 'test_user_key')
-@patch('pushover.PUSHOVER_API_TOKEN', None)
+@patch('main.PUSHOVER_USER_KEY', 'test_user_key')
+@patch('main.PUSHOVER_API_TOKEN', None)
 def test_pushover_missing_api_token():
     """Test Pushover notification with missing API token"""
     result = send_pushover_notification("Test message")
     assert result is False, "Should fail when API token is missing"
 
 @pytest.mark.unit
-@patch('pushover.requests.post')
-@patch('pushover.PUSHOVER_USER_KEY', 'test_user_key')
-@patch('pushover.PUSHOVER_API_TOKEN', 'test_api_token')
+@patch('main.requests.post')
+@patch('main.PUSHOVER_USER_KEY', 'test_user_key')
+@patch('main.PUSHOVER_API_TOKEN', 'test_api_token')
 def test_pushover_api_error(mock_post):
     """Test Pushover notification with API error response"""
     mock_response = MagicMock()
@@ -117,10 +113,10 @@ def test_list_types_long_command(mock_stdout):
     assert "standup:" in output
 
 @pytest.mark.unit
-@patch('sys.argv', ['pushover.py', '-t', 'standup'])
-@patch('pushover.requests.post')
-@patch('pushover.PUSHOVER_USER_KEY', 'test_user_key')
-@patch('pushover.PUSHOVER_API_TOKEN', 'test_api_token')
+@patch('sys.argv', ['main.py', '-t', 'standup'])
+@patch('main.requests.post')
+@patch('main.PUSHOVER_USER_KEY', 'test_user_key')
+@patch('main.PUSHOVER_API_TOKEN', 'test_api_token')
 @patch('sys.stdout', new_callable=StringIO)
 def test_standup_message_command(mock_stdout, mock_post):
     """Test sending standup message via command line"""
@@ -147,12 +143,12 @@ def test_standup_message_command(mock_stdout, mock_post):
 
 @pytest.mark.integration
 def test_pushover_script_list_types():
-    """Integration test for python3 pushover.py -l"""
+    """Integration test for python3 main.py -l"""
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     python_exe = sys.executable
 
     result = subprocess.run([
-        python_exe, 'src/pushover.py', '-l'
+        python_exe, 'main.py', '-l'
     ], capture_output=True, text=True, cwd=project_root)
     
     assert result.returncode == 0
@@ -166,12 +162,12 @@ def test_pushover_script_list_types():
     'PUSHOVER_API_TOKEN': 'test_api_token'
 })
 def test_pushover_script_standup_type():
-    """Integration test for python3 pushover.py -t standup"""
+    """Integration test for python3 main.py -t standup"""
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     python_exe = sys.executable
     
     result = subprocess.run([
-        python_exe, 'src/pushover.py', '-t', 'standup', '--help'
+        python_exe, 'main.py', '-t', 'standup', '--help'
     ], capture_output=True, text=True, cwd=project_root)
     
     assert "choices" in result.stdout or result.returncode in [0, 2]
