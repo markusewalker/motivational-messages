@@ -1,5 +1,5 @@
 ---
-name: Testing main.py
+name: Run Tests
 
 on:
   pull_request:
