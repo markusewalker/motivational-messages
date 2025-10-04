@@ -1,12 +1,8 @@
 # Motivational Messages
 
-| Standup Reminder | Break Reminder | Lunch Reminder | End of Day Reminder |
-|:----------------:|:--------------:|:--------------:|:-------------------:|
-| [![Standup](https://github.com/markusewalker/motivational-messages/actions/workflows/standup.yml/badge.svg?branch=main)](https://github.com/markusewalker/motivational-messages/actions/workflows/standup.yml) | [![Break](https://github.com/markusewalker/motivational-messages/actions/workflows/break.yml/badge.svg?branch=main)](https://github.com/markusewalker/motivational-messages/actions/workflows/break.yml) | [![Lunch](https://github.com/markusewalker/motivational-messages/actions/workflows/lunch.yml/badge.svg?branch=main)](https://github.com/markusewalker/motivational-messages/actions/workflows/lunch.yml) | [![End of Day](https://github.com/markusewalker/motivational-messages/actions/workflows/eod.yml/badge.svg?branch=main)](https://github.com/markusewalker/motivational-messages/actions/workflows/eod.yml) |
-
-| Tests |
-|:-----:|
-| [![Tests](https://github.com/markusewalker/motivational-messages/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/markusewalker/motivational-messages/actions/workflows/run-tests.yml) |
+| Standup Reminder | Break Reminder | Lunch Reminder | End of Day Reminder | Tests |
+|:----------------:|:--------------:|:--------------:|:-------------------:|:-----:|
+| [![Standup](https://github.com/markusewalker/motivational-messages/actions/workflows/standup.yml/badge.svg?branch=main)](https://github.com/markusewalker/motivational-messages/actions/workflows/standup.yml) | [![Break](https://github.com/markusewalker/motivational-messages/actions/workflows/break.yml/badge.svg?branch=main)](https://github.com/markusewalker/motivational-messages/actions/workflows/break.yml) | [![Lunch](https://github.com/markusewalker/motivational-messages/actions/workflows/lunch.yml/badge.svg?branch=main)](https://github.com/markusewalker/motivational-messages/actions/workflows/lunch.yml) | [![End of Day](https://github.com/markusewalker/motivational-messages/actions/workflows/eod.yml/badge.svg?branch=main)](https://github.com/markusewalker/motivational-messages/actions/workflows/eod.yml) | [![Tests](https://github.com/markusewalker/motivational-messages/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/markusewalker/motivational-messages/actions/workflows/run-tests.yml) |
 
 This is a Github Actions based framework that is meant to send motivational messages via the Pushover app for the typical work day! However, if you want to try running this locally, continue reading on to see how.
 
