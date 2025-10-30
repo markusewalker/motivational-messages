@@ -1,0 +1,27 @@
+---
+name: Build binaries
+description: "Builds and packages Go binaries for multiple platforms"
+inputs:
+  goos:
+    description: "Target operating system"
+    required: true
+  goarch:
+    description: "Target architecture"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - run: |
+        mkdir -p dist
+        EXT=${{ inputs.goos == 'windows' && '.exe' || '' }}
+        BIN_NAME=gomotivate-${{ inputs.goos }}-${{ inputs.goarch }}${EXT}
+        GOOS=${{ inputs.goos }} GOARCH=${{ inputs.goarch }} go build -o $BIN_NAME main.go
+
+        if [ "${{ inputs.goos }}" = "windows" ]; then
+          zip dist/${BIN_NAME%.exe}.zip $BIN_NAME
+        else
+          tar -czvf dist/${BIN_NAME}.tar.gz $BIN_NAME
+        fi
+
+        rm $BIN_NAME
