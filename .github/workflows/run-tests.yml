@@ -15,20 +15,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    - name: Set up Go environment
+      uses: actions/setup-go@v5
       with:
-        python-version: '3.13'
-    
-    - name: Install dependencies
-      uses: ./.github/actions/install-dependencies
-
-    - name: Create test .env file
-      uses: ./.github/actions/create-env-file
-      with:
-        user_key: "bogus"
-        token: "bogus"
+        go-version-file: "./go.mod"
 
     - name: Run tests
-      run: |
-        pytest -m "unit or integration" -v
+      run: go test -v ./...

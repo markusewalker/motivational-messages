@@ -3,14 +3,19 @@ name: Run Motivational Messages
 description: "Runs motivational message"
 inputs:
   command:
-    description: "Command to run"
+    description: "Motivational message to run"
+    required: true
+  user_key:
+    description: "Pushover User Key"
+    required: true
+  token:
+    description: "Pushover API Token"
     required: true
 runs:
   using: composite
   steps:
-    - run: |      
-        python3 -m venv env
-        source env/bin/activate
-        pip3 install -r required_libraries.txt
-        python3 main.py -t ${{ inputs.command }}
+    - run: |
+        export PUSHOVER_USER_KEY=${{ inputs.user_key }}
+        export PUSHOVER_API_TOKEN=${{ inputs.token }}
+        go run main.go ${{ inputs.command }}
       shell: bash

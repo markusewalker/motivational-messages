@@ -13,42 +13,39 @@ This project utilizes Pipedream along with cron-job.org to use an external sched
 2. [Getting Started](#Getting-Started)
 3. [Running Program](#Running-Program)
 
-## Prerequisites
 In order to properly run this, you will need the following installed on your client machine:
 
-- `python3`
-- `pip3`
-- `venv` (need `pip3` before installing)
+- Go (1.25+)
 - Pushover app installed on your device
 
 ## Getting Started
-Once you have followed the prerequisites and installed all the needed dependencies, run the following commands:
+To get going, there are two options.
+1. Directly running `go run main.go <motivational message>`
+2. Downloading the relevant binary in the Releases pages
+
+### Option 1
+
+Here is the usage of the CLI tool:
 
 ```
-python3 -m venv env
-source env/bin/activate
-pip3 install -r required_libraries.txt
+$ go run main.go 
+Motivational Messages is a CLI application that sends motivational messages at
+specified times throughout the typical 9-5 workday
+
+Usage:
+  gomotivate [command]
+
+Available Commands:
+  break       Sends a break time reminder notification
+  completion  Generate the autocompletion script for the specified shell
+  eod         Sends an end of day reminder notification
+  help        Help about any command
+  lunch       Sends a lunch time reminder notification
+  standup     Sends a stand-up reminder notification
+
+Flags:
+  -h, --help   help for gomotivate
 ```
 
-Once done, create an `.env` file that has the following filled out:
-
-```
-PUSHOVER_USER_KEY   = ""
-PUSHOVER_API_TOKEN  = ""
-```
-
-## Running Program
-To run the actual program, there are a few options you can do as indicated by `python3 main.py -h`. Here is the that output for your convenience:
-
-```
- python3 main.py -h
-usage: pushover.py [-h] [--type {default,standup,break,lunch,end_work_day}] [--list-types]
-
-Send a motivational message via Pushover
-
-options:
-  -h, --help            show this help message and exit
-  --type, -t {default,standup,break,lunch,end_work_day}
-                        Type of message to send
-  --list-types, -l      List available message types
-```
+### Option 2
+If you download the binary, ensure that you download the asset specific to your OS and architecture. When unzipping, you can customize the name however you see fit. By default, `gomotivate` is the name used in the usage.
