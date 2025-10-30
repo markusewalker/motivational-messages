@@ -47,6 +47,10 @@ jobs:
         with:
           path: dist
 
+      - name: Move all packaged files to dist/
+        run: |
+          find dist -type f -exec mv {} dist/ \;
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
