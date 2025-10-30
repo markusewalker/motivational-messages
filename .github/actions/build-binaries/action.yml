@@ -25,3 +25,4 @@ runs:
         fi
 
         rm $BIN_NAME
+      shell: bash
